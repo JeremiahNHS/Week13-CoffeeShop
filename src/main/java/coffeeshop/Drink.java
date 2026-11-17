@@ -14,8 +14,52 @@ package coffeeshop;
 // Then drag check/coffeeshop/DrinkTest.java into src/test/java/coffeeshop/ and run it.
 // Commit message (after Food is green too):  step 2: Drink and Food
 
-public class Drink {
+public class Drink extends MenuItem {
 
-    // YOUR CODE
-
+    public static double MEDIUM_UPCHARGE = 0.50;
+    public static double LARGE_UPCHARGE = 1.00;
+    private char size;
+    // creates a Drink object with a name, price, and size
+    public Drink(String name, double price, char size) {
+        super(name, price);
+        this.size = size;
+    }
+    // returns the drink's size as an uppercase letter, defaulting to S if the size is invalid
+    public char getSize() {
+        char upper = Character.toUpperCase(size);
+        if (upper == 'M' || upper == 'L' || upper == 'S'){
+            return upper;
+        } else {
+            return 'S';
+        }
+    }
+    // returns the drink's price with an additional charge for medium or large sizes
+    @Override
+    public double getPrice(){
+        char upper = Character.toUpperCase(size);
+        if (upper == 'M') {
+            return super.getPrice() + MEDIUM_UPCHARGE;
+        } else if (upper == 'L'){
+            return super.getPrice() + LARGE_UPCHARGE;
+        } else {
+            return super.getPrice();
+        }
+    }
+    // returns true to identify this item as a drink
+    @Override
+    public boolean isDrink(){
+        return true;
+    }
+    // returns the drink's name, size, and formatted price as a String
+    @Override
+    public String toString(){
+        if (getSize() == 'M') {
+            return super.getName() + " (M) - $" + String.format("%.2f", getPrice());
+        } else if (getSize() == 'L'){
+            return super.getName() + " (L) - $" + String.format("%.2f", getPrice());
+        } else {
+            return super.getName() + " (S) - $" + String.format("%.2f", getPrice());
+        }
+    }
 }
+
