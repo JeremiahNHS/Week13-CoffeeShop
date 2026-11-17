@@ -1,7 +1,7 @@
 package coffeeshop;
 
 import java.util.Scanner;
-
+// Built by: Jeremiah Faustin
 // STEP 6 · CoffeeShopApp: the game you play. This is the class with main.
 //
 // It already runs. Click the green arrow next to main and try it.
