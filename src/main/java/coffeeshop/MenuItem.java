@@ -12,6 +12,29 @@ package coffeeshop;
 
 public class MenuItem {
 
-    // YOUR CODE
+    private String name;
+    private double price;
+    // constructor fo the MenuItem class which takes 2 parameters; name and price
+    public MenuItem(String name, double price){
+        this.name = name;
+        this.price = price;
+    }
+    // returns the name of the menu item
+    public String getName(){
+        return name;
+    }
+    // returns the price
+    public double getPrice(){
+        return price;
+    }
+    // returns if the menu item is a drink or not
+    public boolean isDrink(){
+        return false;
+    }
+    // overwritten toString method returns the name and a formatted double all as a String
+    @Override
+    public String toString(){
+        return name + " - $" + String.format("%.2f", getPrice());
+    }
 
 }
