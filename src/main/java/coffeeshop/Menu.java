@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Menu {
 
     private ArrayList<MenuItem> items;
-
+    // creates a Menu object and adds 8 menu items to its list
     public Menu() {
         items = new ArrayList<>(8);
         items.add(new Drink("Coffee",2.00,'S'));
@@ -27,18 +27,18 @@ public class Menu {
         items.add(new Food("Blueberry Muffin",2.50,false));
         items.add(new Food("Breakfast Sandwich",4.50,false));
     }
-
+    // returns the number of items in the menu
     public int size(){
         return items.size();
     }
-
+    // returns the menu item at the given number, or null if the number is invalid
     public MenuItem getItem(int number){
         if (number < 1 || number > size()) {
             return null;
         }
         return items.get(number - 1);
     }
-
+    // returns all menu items as a numbered list in a String
     @Override
     public String toString(){
         String result = "";
