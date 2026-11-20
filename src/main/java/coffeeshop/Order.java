@@ -18,6 +18,81 @@ import java.util.ArrayList;
 
 public class Order {
 
-    // YOUR CODE
-
+    public static String COUPON_CODE = "HORNET10";
+    public static int COUPON_PERCENT = 10;
+    private static int nextOrderNumber = 1;
+    private int orderNumber;
+    private ArrayList<MenuItem> items;
+    private int discountPercent;
+    // creates an Order object that has a unique order number and an empty list of MenuItems
+    public Order() {
+        orderNumber = nextOrderNumber;
+        nextOrderNumber++;
+        items = new ArrayList<>();
+        discountPercent = 0;
+    }
+    // returns the order's number
+    public int getOrderNumber(){
+        return orderNumber;
+    }
+    // adds a Menu item to the order
+    public void addItem(MenuItem item){
+        items.add(item);
+    }
+    // removes an item from the order and returns true if successful or false if the number is invalid
+    public boolean removeItem(int number){
+        if (number >= 1 && number <= items.size()) {
+            MenuItem item = items.get(number - 1);
+            items.remove(item);
+            return true;
+        }
+        return false;
+    }
+    // returns how many items are in the order
+    public int getItemCount(){
+        return items.size();
+    }
+    // returns true if there are no items or false if it does
+    public boolean isEmpty(){
+        return getItemCount() == 0;
+    }
+    // returns the combined price of all items in the order
+    public double getSubtotal(){
+        double price = 0.0;
+        for (MenuItem item : items){
+            price += item.getPrice();
+        }
+        return price;
+    }
+    // checks if the coupon is valid and applies the discount if it is
+    public boolean applyCoupon(String code){
+        if (code.trim().equalsIgnoreCase(COUPON_CODE)){
+            discountPercent = COUPON_PERCENT;
+            return true;
+        }
+        return false;
+    }
+    // returns the amount taken off the subtotal from the discount
+    public double getDiscount(){
+        return getSubtotal() * (discountPercent / 100.0);
+    }
+    // returns the final order price after applying the discount and tip
+    public double getTotal(int tipPercent) {
+        if (tipPercent > 0) {
+            double tipAmount = (getSubtotal() - getDiscount()) * (tipPercent / 100.0);
+            return (getSubtotal() - getDiscount()) + tipAmount;
+        }
+        return getSubtotal() - getDiscount();
+    }
+    // returns the order number, numbered items, and subtotal as a String
+    @Override
+    public String toString(){
+        String str = "\nOrder #" + orderNumber + "\n" ;
+        double price = 0.0;
+        for (MenuItem i : items){
+            str += (items.indexOf(i) + 1) + ". " + i + "\n";
+            price += i.getPrice();
+        }
+        return  str + "Subtotal: $" + String.format("%.2f",price);
+    }
 }
