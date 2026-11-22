@@ -24,16 +24,13 @@ public class Food extends MenuItem {
     }
     // returns whether the food item is heated or not
     public boolean isHeated(){
-        if (heated == true){
-            return true;
-        } else {
-            return false;
-        }
+        return heated;
+
     }
     // returns the food's price, adding the 50-cent heating fee if it is heated
     @Override
     public double getPrice(){
-        if (heated == true) {
+        if (heated) {
             return super.getPrice() + HEAT_FEE;
         } else {
             return super.getPrice();
@@ -42,7 +39,7 @@ public class Food extends MenuItem {
     // returns the food's name and price as a formatted String, including whether it is heated
     @Override
     public String toString(){
-        if (heated == true) {
+        if (heated) {
             return super.getName() + ", heated - $" + String.format("%.2f", getPrice());
         } else {
             return super.getName() + " - $" + String.format("%.2f", super.getPrice());

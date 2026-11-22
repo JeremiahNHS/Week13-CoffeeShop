@@ -12,8 +12,8 @@ package coffeeshop;
 
 public class MenuItem {
 
-    private String name;
-    private double price;
+    final private String name;
+    final private double price;
     // constructor fo the MenuItem class which takes 2 parameters; name and price
     public MenuItem(String name, double price){
         this.name = name;
