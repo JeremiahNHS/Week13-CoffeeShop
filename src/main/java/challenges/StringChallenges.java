@@ -14,7 +14,10 @@ public class StringChallenges {
     //   orderCode("Tea", 'L')   -> "TEA-L"
     //   orderCode("Mo", 's')    -> "MO-S"
     public static String orderCode(String name, char size) {
-        return "";   // YOUR CODE
+        if (name.length() > 3){
+            return name.substring(0,3).toUpperCase() + "-" + Character.toUpperCase(size);
+        }
+        return name.toUpperCase() + "-" + Character.toUpperCase(size);   // YOUR CODE
     }
 
     // Write a customer's name on the cup neatly: no spaces at the ends, the first letter
@@ -23,7 +26,12 @@ public class StringChallenges {
     //   cupName("  sky  ")  -> "Sky"
     //   cupName("   ")      -> "Guest"
     public static String cupName(String name) {
-        return "";   // YOUR CODE
+        String trimName = name.trim();
+        if (trimName.isEmpty()) {
+            return "Guest";
+        }
+        return trimName.substring(0, 1).toUpperCase() + trimName.substring(1, trimName.length()).toLowerCase();
+        // YOUR CODE
     }
 
     // How many times does word show up in order? Capital and small letters count the same.
@@ -33,7 +41,23 @@ public class StringChallenges {
     //   countWord("oat milk latte", "milk")          -> 1
     //   countWord("black coffee", "sugar")           -> 0
     public static int countWord(String order, String word) {
-        return 0;   // YOUR CODE
+        if (order.isEmpty() || word.isEmpty()){
+            return 0;
+        }
+        String orderLower = order.toLowerCase();
+        String wordLower = word.toLowerCase();
+        int count = 0;
+        int i = 0;
+
+            while (i < orderLower.length()) {
+                int indexOf = orderLower.indexOf(wordLower,i);
+                if (indexOf < 0){
+                    break;
+                }
+                i = indexOf + wordLower.length();
+                count++;
+            }
+        return count;// YOUR CODE
     }
 
     // One line of a receipt. The name, then dots until the line is 20 characters long,
@@ -42,6 +66,7 @@ public class StringChallenges {
     //   receiptLine("Latte", 3.75) -> "Latte...............$3.75"   (5 letters + 15 dots = 20)
     //   receiptLine("Bagel", 2.5)  -> "Bagel...............$2.50"
     public static String receiptLine(String name, double price) {
-        return "";   // YOUR CODE
+        String dots = ".".repeat(Math.max(0,20 - name.length()));
+        return String.format("%s%s$%.2f", name, dots, price);// YOUR CODE
     }
 }
