@@ -12,7 +12,16 @@ public class LogicChallenges {
     //   anything else -> -1.0 (that size does not exist)
     //   sizeUpcharge('M') -> 0.5     sizeUpcharge('l') -> 1.0     sizeUpcharge('X') -> -1.0
     public static double sizeUpcharge(char size) {
-        return 0.0;   // YOUR CODE
+        if (size == 'S' || size == 's'){
+            return 0.0;
+        }
+        if (size == 'M' || size == 'm'){
+            return 0.50;
+        }
+        if (size == 'L' || size == 'l'){
+            return 1.00;
+        }
+        return -1.0;   // YOUR CODE
     }
 
     // Happy hour on a weekday is from hour 14 to hour 16 (2 PM to 4 PM), both included.
@@ -21,6 +30,12 @@ public class LogicChallenges {
     //   isHappyHour(15, false) -> true     isHappyHour(12, false) -> false
     //   isHappyHour(12, true)  -> true     isHappyHour(25, true)  -> false
     public static boolean isHappyHour(int hour, boolean weekend) {
+        if ((hour >= 14 && hour <= 16) && !weekend){
+            return true;
+        }
+        if ((hour >= 12 && hour <= 17) && weekend){
+            return true;
+        }
         return false;   // YOUR CODE
     }
 
@@ -31,6 +46,9 @@ public class LogicChallenges {
     //   freeDrinks(8, 3)  -> 1     freeDrinks(0, 25) -> 2
     //   freeDrinks(4, 5)  -> 0     freeDrinks(-1, 30) -> 0
     public static int freeDrinks(int stamps, int bought) {
+        if (stamps >= 0 && bought >= 0){
+            return (stamps + bought) / 10;
+        }
         return 0;   // YOUR CODE
     }
 
@@ -41,6 +59,23 @@ public class LogicChallenges {
     //   coinsForChange(41) -> 4  (25 + 10 + 5 + 1)
     //   coinsForChange(99) -> 9  (3 quarters, 2 dimes, 4 pennies)
     public static int coinsForChange(int cents) {
-        return 0;   // YOUR CODE
+        int count = 0;
+        int remainingCents = cents;
+        while (remainingCents > 0){
+            if (remainingCents >= 25){
+                remainingCents -= 25;
+                count++;
+            } else if (remainingCents >= 10){
+                remainingCents -= 10;
+                count++;
+            } else if (remainingCents >= 5){
+                remainingCents -= 5;
+                count++;
+            } else {
+                count += remainingCents;
+                remainingCents = 0;
+            }
+        }
+        return count;   // YOUR CODE
     }
 }
