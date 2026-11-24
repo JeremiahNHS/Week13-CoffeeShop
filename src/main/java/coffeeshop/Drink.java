@@ -22,13 +22,12 @@ public class Drink extends MenuItem {
     // creates a Drink object with a name, price, and size
     public Drink(String name, double price, char size) {
         super(name, price);
-        this.size = size;
+        this.size = Character.toUpperCase(size);
     }
     // returns the drink's size as an uppercase letter, defaulting to S if the size is invalid
     public char getSize() {
-        char upper = Character.toUpperCase(size);
-        if (upper == 'M' || upper == 'L' || upper == 'S'){
-            return upper;
+        if (size == 'M' || size == 'L' || size == 'S'){
+            return size;
         } else {
             return 'S';
         }
@@ -36,10 +35,9 @@ public class Drink extends MenuItem {
     // returns the drink's price with an additional charge for medium or large sizes
     @Override
     public double getPrice(){
-        char upper = Character.toUpperCase(size);
-        if (upper == 'M') {
+        if (getSize() == 'M') {
             return super.getPrice() + MEDIUM_UPCHARGE;
-        } else if (upper == 'L'){
+        } else if (getSize() == 'L'){
             return super.getPrice() + LARGE_UPCHARGE;
         } else {
             return super.getPrice();
@@ -52,14 +50,9 @@ public class Drink extends MenuItem {
     }
     // returns the drink's name, size, and formatted price as a String
     @Override
-    public String toString(){
-        if (getSize() == 'M') {
-            return super.getName() + " (M) - $" + String.format("%.2f", getPrice());
-        } else if (getSize() == 'L'){
-            return super.getName() + " (L) - $" + String.format("%.2f", getPrice());
-        } else {
-            return super.getName() + " (S) - $" + String.format("%.2f", getPrice());
-        }
+    public String toString() {
+        return super.getName() + " (" + getSize() + ") - $" + String.format("%.2f", getPrice());
+
     }
 }
 
