@@ -36,9 +36,10 @@ public class CoffeeShop {
     // adds a non-empty order to completed orders, updates total sales, and returns the order's total
     public double checkout(Order order, int tipPercent){
         if (order.getItemCount() != 0){
+            double total = order.getTotal(tipPercent);
             completedOrders.add(order);
-            totalSales += order.getTotal(tipPercent);
-            return order.getTotal(tipPercent);
+            totalSales += total;
+            return total;
         }
         return 0;
     }
@@ -60,7 +61,7 @@ public class CoffeeShop {
     }
     // returns a report of the orders completed, items sold and total sales as a String
     public String salesReport(){
-        return "\nHornet Coffee - today's sales\n\tOrders: "
+        return "\n" + getName() + " - today's sales\n\tOrders: "
                 + getOrdersCompleted() + "\n\tItems sold: "
                 + getItemsSold() + "\n\tTotal: $" + String.format("%.2f",getTotalSales()) + "\n";
     }
