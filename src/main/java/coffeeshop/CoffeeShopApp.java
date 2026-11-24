@@ -131,7 +131,12 @@ public class CoffeeShopApp {
         } else {
             System.out.println(order);
             int item = readNumber("Item number: ");
-            order.removeItem(item);
+
+            if (order.removeItem(item)){
+                System.out.println("Item removed from order");
+            } else {
+                System.out.println("There is no such item");
+            }
         }
     }
     // displays the user's current order or lets them know if it is empty
