@@ -16,8 +16,8 @@ package coffeeshop;
 
 public class Drink extends MenuItem {
 
-    public static double MEDIUM_UPCHARGE = 0.50;
-    public static double LARGE_UPCHARGE = 1.00;
+    public final static double MEDIUM_UPCHARGE = 0.50;
+    public final static double LARGE_UPCHARGE = 1.00;
     private char size;
     // creates a Drink object with a name, price, and size
     public Drink(String name, double price, char size) {

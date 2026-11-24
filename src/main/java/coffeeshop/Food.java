@@ -15,7 +15,7 @@ package coffeeshop;
 
 public class Food extends MenuItem {
 
-    public static double HEAT_FEE = 0.50;
+    public final static double HEAT_FEE = 0.50;
     private boolean heated;
     // creates a Food object with a name, price, and whether it is heated
     public Food(String name, double price, boolean heated) {
