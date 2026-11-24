@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class Order {
 
-    public static String COUPON_CODE = "HORNET10";
-    public static int COUPON_PERCENT = 10;
+    public final static String COUPON_CODE = "HORNET10";
+    public final static int COUPON_PERCENT = 10;
     private static int nextOrderNumber = 1;
     private int orderNumber;
     private ArrayList<MenuItem> items;
@@ -68,6 +68,7 @@ public class Order {
     public boolean applyCoupon(String code){
         if (code.trim().equalsIgnoreCase(COUPON_CODE)){
             discountPercent = COUPON_PERCENT;
+            System.out.printf("$%.2f discount\n", getDiscount());
             return true;
         }
         return false;
@@ -88,11 +89,9 @@ public class Order {
     @Override
     public String toString(){
         String str = "\nOrder #" + orderNumber + "\n" ;
-        double price = 0.0;
-        for (MenuItem i : items){
-            str += (items.indexOf(i) + 1) + ". " + i + "\n";
-            price += i.getPrice();
+        for (int i = 0; i < items.size(); i++){
+            str += (i + 1) + ". " + items.get(i) + "\n";
         }
-        return  str + "Subtotal: $" + String.format("%.2f",price);
+        return  str + "Subtotal: $" + String.format("%.2f",getSubtotal());
     }
 }
